@@ -20,7 +20,7 @@ class Knight(Piece):
 
 class Rook(Piece):
 	def __init__(self):
-		Piece.__init__(self, 6, "rook")
+		Piece.__init__(self, 5, "rook")
 
 class Queen(Piece):
 	def __init__(self):
