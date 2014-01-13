@@ -1,4 +1,3 @@
-from pieces import *
 from board import Board
 from player import Player
 
