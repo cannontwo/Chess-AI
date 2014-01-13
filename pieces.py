@@ -16,29 +16,29 @@ class Piece:
 
 class Pawn(Piece):
     def __init__(self):
-        Piece.__init__(self, 1, "pawn")
+        Piece(self, 1, "pawn")
 
 
 class Bishop(Piece):
     def __init__(self):
-        Piece.__init__(self, 3, "bishop")
+        Piece(self, 3, "bishop")
 
 
 class Knight(Piece):
     def __init__(self):
-        Piece.__init__(self, 3, "knight")
+        Piece(self, 3, "knight")
 
 
 class Rook(Piece):
     def __init__(self):
-        Piece.__init__(self, 5, "rook")
+        Piece(self, 5, "rook")
 
 
 class Queen(Piece):
     def __init__(self):
-        Piece.__init__(self, 9, "queen")
+        Piece(self, 9, "queen")
 
 
 class King(Piece):
     def __init__(self):
-        Piece.__init__(self, 20, "king")
+        Piece(self, 20, "king")
