@@ -2,13 +2,14 @@
 from __builtin__ import str
 
 
-class Piece:
+class Piece(object):
     def __init__(self, points=0, name="", location=(0, 0)):
         self.points = points
         self.name = name
         self.location = location
 
-    def string_rep(self):
+    def __repr__(self):
+        """Returns string representation of the given piece"""
         return_string = " "
         return_string += "P:" + str(self.points) + " "
         return_string += self.name + " "
@@ -22,7 +23,7 @@ class Piece:
 
 class Pawn(Piece):
     def __init__(self):
-        Piece(self, 1, "pawn")
+        super(Pawn, self).__init__(1, "pawn")
 
     def possible_moves(self, board):
         """Possible moves for a pawn"""
@@ -30,7 +31,7 @@ class Pawn(Piece):
 
 class Bishop(Piece):
     def __init__(self):
-        Piece(self, 3, "bishop")
+        super(Bishop, self).__init__(3, "bishop")
 
     def possible_moves(self, board):
         """Possible moves for a bishop"""
@@ -38,7 +39,7 @@ class Bishop(Piece):
 
 class Knight(Piece):
     def __init__(self):
-        Piece(self, 3, "knight")
+        super(Knight, self).__init__(3, "knight")
 
     def possible_moves(self, board):
         """Possible moves for a knight"""
@@ -46,7 +47,7 @@ class Knight(Piece):
 
 class Rook(Piece):
     def __init__(self):
-        Piece(self, 5, "rook")
+        super(Rook, self).__init__(5, "rook")
 
     def possible_moves(self, board):
         """Possible moves for a rook"""
@@ -54,7 +55,7 @@ class Rook(Piece):
 
 class Queen(Piece):
     def __init__(self):
-        Piece(self, 9, "queen")
+        super(Queen, self).__init__(9, "queen")
 
     def possible_moves(self, board):
         """Possible moves for a queen"""
@@ -62,7 +63,7 @@ class Queen(Piece):
 
 class King(Piece):
     def __init__(self):
-        Piece(self, 20, "king")
+        super(King, self).__init__(20, "king")
 
     def possible_moves(self, board):
         """Possible moves for a King"""

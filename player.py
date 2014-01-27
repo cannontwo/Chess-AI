@@ -1,13 +1,13 @@
-from board import Board
+import board
 from pieces import *
 
 
 class Player:
-    def __init__(self, player_num, board):
+    def __init__(self, player_num, player_board):
         """player_num is either 1 or 0, representing black or white"""
         self.pieces = []
 
-        self.init_board(board)
+        self.init_board(player_board)
 
         assert player_num == 0 or player_num == 1, "Player number invalid"
 
@@ -52,18 +52,9 @@ class Player:
         self.pieces.append(temp)
 
         for piece in self.pieces:
-            board.add_piece(piece)
+            player_board.add_piece(piece)
 
-    def init_board(self, board):
+    def init_board(self, player_board):
         """Initializes local board variable"""
-        assert isinstance(board, Board), "Parameter must be of type 'Board'"
-        self.board = board
-
-    def get_board_string(self):
-        return_string = ""
-
-        for piece in self.pieces:
-            return_string = return_string + "," + piece.string_rep()
-
-        return_string = return_string[1:]
-        return return_string
+        assert isinstance(player_board, board.Board), "Parameter must be of type 'Board'"
+        self.current_board = player_board
