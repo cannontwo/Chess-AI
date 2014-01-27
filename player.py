@@ -44,6 +44,9 @@ class Player:
         temp.location = (3 + player_num, player_num * 7)
         self.pieces.append(temp)
 
+        """Each player's king. Editing king should be done through 'pieces' array if possible"""
+        self.king = temp
+
         temp = Queen()
         temp.location = (4 - player_num, player_num * 7)
         self.pieces.append(temp)
