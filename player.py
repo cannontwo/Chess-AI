@@ -5,9 +5,11 @@ from pieces import *
 class Player:
     def __init__(self, player_num, player_board):
         """player_num is either 1 or 0, representing black or white"""
+
         self.pieces = []
 
-        self.init_board(player_board)
+        assert isinstance(player_board, board.Board), "Parameter must be of type 'Board'"
+        self.current_board = player_board
 
         assert player_num == 0 or player_num == 1, "Player number invalid"
 
@@ -53,8 +55,3 @@ class Player:
 
         for piece in self.pieces:
             player_board.add_piece(piece)
-
-    def init_board(self, player_board):
-        """Initializes local board variable"""
-        assert isinstance(player_board, board.Board), "Parameter must be of type 'Board'"
-        self.current_board = player_board

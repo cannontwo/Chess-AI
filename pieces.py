@@ -3,10 +3,11 @@ from __builtin__ import str
 
 
 class Piece(object):
-    def __init__(self, points=0, name="", location=(0, 0)):
+    def __init__(self, points=0, name="", location=(0, 0), player_num = 0):
         self.points = points
         self.name = name
         self.location = location
+        self.player_num = player_num
 
     def __repr__(self):
         """Returns string representation of the given piece"""
@@ -22,48 +23,49 @@ class Piece(object):
 
 
 class Pawn(Piece):
-    def __init__(self):
-        super(Pawn, self).__init__(1, "pawn")
+    def __init__(self, location=(0, 0), player_num = 0):
+        super(Pawn, self).__init__(1, "pawn", location, player_num)
 
     def possible_moves(self, board):
         """Possible moves for a pawn"""
 
 
+
 class Bishop(Piece):
-    def __init__(self):
-        super(Bishop, self).__init__(3, "bishop")
+    def __init__(self, location=(0, 0), player_num = 0):
+        super(Bishop, self).__init__(3, "bishop", location, player_num)
 
     def possible_moves(self, board):
         """Possible moves for a bishop"""
 
 
 class Knight(Piece):
-    def __init__(self):
-        super(Knight, self).__init__(3, "knight")
+    def __init__(self, location=(0, 0), player_num = 0):
+        super(Knight, self).__init__(3, "knight", location, player_num)
 
     def possible_moves(self, board):
         """Possible moves for a knight"""
 
 
 class Rook(Piece):
-    def __init__(self):
-        super(Rook, self).__init__(5, "rook")
+    def __init__(self, location=(0, 0), player_num = 0):
+        super(Rook, self).__init__(5, "rook", location, player_num)
 
     def possible_moves(self, board):
         """Possible moves for a rook"""
 
 
 class Queen(Piece):
-    def __init__(self):
-        super(Queen, self).__init__(9, "queen")
+    def __init__(self, location=(0, 0), player_num = 0):
+        super(Queen, self).__init__(9, "queen", location, player_num)
 
     def possible_moves(self, board):
         """Possible moves for a queen"""
 
 
 class King(Piece):
-    def __init__(self):
-        super(King, self).__init__(20, "king")
+    def __init__(self, location=(0, 0), player_num = 0):
+        super(King, self).__init__(20, "king", location, player_num)
 
     def possible_moves(self, board):
         """Possible moves for a King"""
