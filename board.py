@@ -5,13 +5,24 @@ import pieces
 
 class Board:
 
+    @staticmethod
+    def compare_board(cmp_board):
+        if isinstance(cmp_board, Board):
+            return cmp_board.evaluate()
+        else:
+            return 0
+
     def __init__(self):
         self.pieces = {}
         self.current_turn = 0
 
     def add_piece(self, piece):
+        """Adds piece to board at the piece's location if the board does not already have a piece at that location.
+            Should only be called at board creation and when a pawn reaches the opposite edge of the board."""
         assert isinstance(piece, pieces.Piece), "The given object is not a piece"
-        self.pieces[piece.location] = piece
+
+        if self.check_tile_empty(piece.location):
+            self.pieces[piece.location] = piece
 
     def check_tile_empty(self, location):
         assert type(location) == tuple
@@ -20,7 +31,8 @@ class Board:
         else:
             return True
 
-    def evaluate(self, player_num):
+    def evaluate(self, player_num=0):
+        """Returns point sum of piece values on the board for a specified player"""
         point_sum = 0
 
         for piece in self.pieces.values():
