@@ -22,13 +22,13 @@ class Piece(object):
 
 #TODO Massive implementation of possible move generation for different pieces
 
+
 class Pawn(Piece):
     def __init__(self, location=(0, 0), player_num = 0):
         super(Pawn, self).__init__(1, "pawn", location, player_num)
 
     def possible_moves(self, board):
         """Possible moves for a pawn"""
-
 
 
 class Bishop(Piece):

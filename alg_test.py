@@ -11,9 +11,11 @@ class Node:
         for x in range(0, self.child_num):
             self.children.append(Node())
 
+        return self.children
+
 
 def alphabeta(node, depth, a, b, maximizing_player):
-    if depth == 0 or len(node.children) == 0:
+    if depth == 0 or node.child_num == 0:
         return node.value
     if maximizing_player:
         for child in node.generate_children():
@@ -22,10 +24,10 @@ def alphabeta(node, depth, a, b, maximizing_player):
                 break
         return a
     else:
-        for child in node.children:
+        for child in node.generate_children():
             b = min(b, alphabeta(child, depth - 1, a, b, True))
             if b <= a:
                 break
         return b
 
-print alphabeta(Node(), 4, -99999999, 999999999, True)
+print "\nAnswer: " + str(alphabeta(Node(), 4, -99999999, 999999999, True))
