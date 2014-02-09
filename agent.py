@@ -1,5 +1,6 @@
 import board
 
+
 class Agent:
     def __init__(self, player1, player2, start_board):
         """Create main AI agent"""
@@ -10,7 +11,7 @@ class Agent:
 
         self.possible_boards = []
 
-    def take_turn(self, branch):
+    def take_turn(self, turn_board):
         """Main loop of the AI"""
 
         #At some point

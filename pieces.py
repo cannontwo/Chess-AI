@@ -1,4 +1,3 @@
-#!/bin/python
 from __builtin__ import str
 
 
@@ -21,6 +20,7 @@ class Piece(object):
         """Returns possible moves for a specific piece and board state"""
         raise NotImplementedError("Implement an error to return possible moves")
 
+#TODO Massive implementation of possible move generation for different pieces
 
 class Pawn(Piece):
     def __init__(self, location=(0, 0), player_num = 0):
