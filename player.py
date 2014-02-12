@@ -7,6 +7,7 @@ class Player:
         """player_num is either 1 or 0, representing black or white"""
 
         self.pieces = []
+        self.player_num = player_num
 
         assert isinstance(player_board, board.Board), "Parameter must be of type 'Board'"
         self.current_board = player_board

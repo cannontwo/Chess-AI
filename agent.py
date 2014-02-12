@@ -1,20 +1,50 @@
 import board
+import player
 
 
 class Agent:
     def __init__(self, player1, player2, start_board):
         """Create main AI agent"""
 
-        self.player_white = player1
-        self.player_black = player2
-        self.current_board = start_board
+        assert isinstance(player1, player.Player)
+        assert isinstance(player2, player.Player)
+        assert isinstance(start_board, board.Board)
 
-        self.possible_boards = []
+        self.me_player = player1
+        self.enemy_player = player2
 
-    def take_turn(self, turn_board):
+    def take_turn(self, eval_board, depth, a, b, player_num):
         """Main loop of the AI"""
+        assert isinstance(eval_board, board.Board)
 
-        #At some point
-        self.possible_boards.sort(key=board.Board.compare_board, reverse=True)
+        if depth == 0 or len(eval_board.get_possible_moves()) == 0:
+            return eval_board
 
+        if player_num == 0:
+            for move in eval_board.get_possible_moves().sort(key=board.Board.compare_board, reverse=True):
+                a = max(a, self.take_turn(move, depth - 1, a, b, 1), key=board.Board.compare_board)
+                if b.evaluate() <= a.evaluate():
+                    break
+            return a
+        else:
+            for move in eval_board.get_possible_moves().sort(key=board.Board.compare_board, reverse=True):
+                b = min(b, self.take_turn(move, depth - 1, a, b, 0), key=board.Board.compare_board)
+                if b.evaluate() <= a.evaluate():
+                    break
+            return b
 
+    def run(self, current_board):
+
+        best_board = self.take_turn(current_board,
+                                    4,
+                                    board.FakeBoard(-9999999),
+                                    board.FakeBoard(9999999),
+                                    self.me_player.player_num)
+
+        return self.generate_real_move(self.start_board, best_board)
+
+    def generate_real_move(self, first_board, new_board):
+        assert isinstance(first_board, board.Board)
+        assert isinstance(new_board, board.Board)
+
+        #TODO: Add something chess framework-specific to return a real move to the framework

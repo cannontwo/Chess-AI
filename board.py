@@ -67,3 +67,21 @@ class Board:
         return_board.apply_branch(new_branch)
 
         return return_board
+
+    def get_possible_moves(self, player_num):
+        moves = []
+        for piece in self.pieces:
+            for move in piece.possible_moves():
+                moves.append(move)
+
+        return moves
+
+
+class FakeBoard(Board):
+
+    def __init__(self, num):
+        super.__init__()
+        self.value = num
+
+    def evaluate(self, player_num=0):
+        return self.value
