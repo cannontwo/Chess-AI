@@ -4,7 +4,7 @@ from pieces import *
 
 class Player:
     def __init__(self, player_num, player_board):
-        """player_num is either 1 or 0, representing black or white"""
+        """player_num is either 1 or 0, representing self or other"""
 
         self.pieces = []
         self.player_num = player_num
@@ -55,4 +55,5 @@ class Player:
         self.pieces.append(temp)
 
         for piece in self.pieces:
+            piece.player_num = player_num
             player_board.add_piece(piece)

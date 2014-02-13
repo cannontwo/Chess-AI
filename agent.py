@@ -17,17 +17,18 @@ class Agent:
         """Main loop of the AI"""
         assert isinstance(eval_board, board.Board)
 
-        if depth == 0 or len(eval_board.get_possible_moves()) == 0:
+        if depth == 0 or len(eval_board.get_possible_moves(player_num)) == 0:
             return eval_board
 
+        #The number passed to evaluate() should never change, so that scores are consistent for similar board states
         if player_num == 0:
-            for move in eval_board.get_possible_moves().sort(key=board.Board.compare_board, reverse=True):
+            for move in eval_board.get_possible_moves(player_num).sort(key=board.Board.compare_board, reverse=True):
                 a = max(a, self.take_turn(move, depth - 1, a, b, 1), key=board.Board.compare_board)
                 if b.evaluate() <= a.evaluate():
                     break
             return a
         else:
-            for move in eval_board.get_possible_moves().sort(key=board.Board.compare_board, reverse=True):
+            for move in eval_board.get_possible_moves(player_num).sort(key=board.Board.compare_board, reverse=True):
                 b = min(b, self.take_turn(move, depth - 1, a, b, 0), key=board.Board.compare_board)
                 if b.evaluate() <= a.evaluate():
                     break
@@ -41,7 +42,7 @@ class Agent:
                                     board.FakeBoard(9999999),
                                     self.me_player.player_num)
 
-        return self.generate_real_move(self.start_board, best_board)
+        return self.generate_real_move(current_board, best_board)
 
     def generate_real_move(self, first_board, new_board):
         assert isinstance(first_board, board.Board)

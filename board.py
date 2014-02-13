@@ -48,11 +48,17 @@ class Board:
 
         assert isinstance(current_branch, branch.Branch)
 
-        if current_branch.piece in self.pieces.values():
-            current_location = current_branch.piece.location
-            current_branch.piece.location = current_branch.move_location
-            self.pieces[current_branch.move_location] = current_branch.piece
-            del(self.pieces[current_location])
+        if isinstance(self.pieces[current_branch.from_location], current_branch.piece.__class__):
+            move_piece = self.pieces[current_branch.from_location]
+            move_piece.location = current_branch.to_location
+            self.pieces[current_branch.to_location] = move_piece
+            del(self.pieces[current_branch.from_location])
+
+        #if current_branch.piece in self.pieces.values():
+        #    current_location = current_branch.piece.location
+        #    current_branch.piece.location = current_branch.move_location
+        #    self.pieces[current_branch.move_location] = current_branch.piece
+        #    del(self.pieces[current_location])
 
     def create_branch_board(self, pos_branch):
         """Returns a new board with the branch applied to it"""
@@ -62,7 +68,7 @@ class Board:
         return_board = deepcopy(self)
 
         cur_piece = return_board.pieces[pos_branch.piece.location]
-        new_branch = branch.Branch(cur_piece, pos_branch.move_location)
+        new_branch = branch.Branch(cur_piece, pos_branch.to_location)
 
         return_board.apply_branch(new_branch)
 
@@ -70,9 +76,10 @@ class Board:
 
     def get_possible_moves(self, player_num):
         moves = []
-        for piece in self.pieces:
-            for move in piece.possible_moves():
-                moves.append(move)
+        for piece in self.pieces.values():
+            if piece.player_num == player_num:
+                for move in piece.possible_moves(player_num):
+                    moves.append(move)
 
         return moves
 
@@ -80,7 +87,6 @@ class Board:
 class FakeBoard(Board):
 
     def __init__(self, num):
-        super.__init__()
         self.value = num
 
     def evaluate(self, player_num=0):
