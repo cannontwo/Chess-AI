@@ -58,7 +58,12 @@ print foo.evaluate(0)
 print foo.check_tile_empty((5,5))
 print foo.check_tile_empty((5,3))
 
-print foo.get_possible_moves(0)[0].pieces[(1,2)]
+print foo.get_possible_moves(0)
+
+for move in foo.get_possible_moves(0):
+    for piece in move.pieces.values():
+        if isinstance(piece, pieces.Bishop) and piece.player_num == 0:
+            print piece
 
 boards = [foo, spaz, bap]
 boards.sort(key=board.Board.compare_board, reverse=True)
