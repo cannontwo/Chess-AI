@@ -1,3 +1,4 @@
+#!/usr/bin/python
 import pieces
 import board
 import branch
