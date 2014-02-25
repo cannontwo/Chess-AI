@@ -1,4 +1,5 @@
 from __builtin__ import str
+import branch
 
 
 class Piece(object):
@@ -31,6 +32,22 @@ class Pawn(Piece):
 
     def possible_moves(self, board):
         """Possible moves for a pawn"""
+        pos_moves = []
+        current_x = self.location[0]
+        current_y = self.location[1]
+
+        if self.player_num is 0:
+            if board.check_tile_empty((current_x, current_y + 1)) and board.check_valid_location((current_x, current_y + 1)):
+                pos_moves.append(board.create_branch_board(branch.Branch(self, (current_x, current_y + 1))))
+            elif board.check_valid_location((current_x + 1, current_y + 1)) and not board.check_tile_empty((current_x + 1, current_y + 1)):
+                if board.pieces[(current_x + 1, current_y + 1)].player_num != self.player_num:
+                    pos_moves.append(board.create_branch_board(branch.Branch(self, (current_x + 1, current_y + 1))))
+            elif board.check_valid_location((current_x - 1, current_y + 1)) and not board.check_tile_empty((current_x - 1, current_y + 1)):
+                if board.pieces[(current_x - 1, current_y + 1)].player_num != self.player_num:
+                    pos_moves.append(board.create_branch_board(branch.Branch(self, (current_x - 1, current_y + 1))))
+
+        return pos_moves
+
 
 
 class Bishop(Piece):
@@ -39,6 +56,9 @@ class Bishop(Piece):
 
     def possible_moves(self, board):
         """Possible moves for a bishop"""
+        pos_moves = []
+
+        return pos_moves
 
 
 class Knight(Piece):
@@ -47,6 +67,9 @@ class Knight(Piece):
 
     def possible_moves(self, board):
         """Possible moves for a knight"""
+        pos_moves = []
+
+        return pos_moves
 
 
 class Rook(Piece):
@@ -55,6 +78,9 @@ class Rook(Piece):
 
     def possible_moves(self, board):
         """Possible moves for a rook"""
+        pos_moves = []
+
+        return pos_moves
 
 
 class Queen(Piece):
@@ -63,6 +89,9 @@ class Queen(Piece):
 
     def possible_moves(self, board):
         """Possible moves for a queen"""
+        pos_moves = []
+
+        return pos_moves
 
 
 class King(Piece):
@@ -71,3 +100,6 @@ class King(Piece):
 
     def possible_moves(self, board):
         """Possible moves for a King"""
+        pos_moves = []
+
+        return pos_moves

@@ -31,6 +31,13 @@ class Board:
         else:
             return True
 
+    def check_valid_location(self, location):
+        assert type(location) == tuple
+        if location[0] > 7 or location[1] > 7 or location[0] < 0 or location[1] < 0:
+            return False
+        else:
+            return True
+
     def evaluate(self, player_num=0):
         """Returns point sum of piece values on the board for a specified player"""
         point_sum = 0
@@ -78,7 +85,7 @@ class Board:
         moves = []
         for piece in self.pieces.values():
             if piece.player_num == player_num:
-                for move in piece.possible_moves(player_num):
+                for move in piece.possible_moves(self):
                     moves.append(move)
 
         return moves
