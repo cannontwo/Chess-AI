@@ -55,8 +55,8 @@ class Bishop(Piece):
     def possible_moves(self, board):
         """Possible moves for a bishop"""
         pos_moves = []
-        x = self.location[0]
-        y = self.location[1]
+        x = current_x = self.location[0]
+        y = current_y = self.location[1]
 
         while True:
             x += 1
@@ -73,6 +73,9 @@ class Bishop(Piece):
             if not board.check_valid_location((x + 1, y + 1)):
                 break
 
+        x = current_x
+        y = current_y
+
         while True:
             x -= 1
             y += 1
@@ -88,6 +91,9 @@ class Bishop(Piece):
             if not board.check_valid_location((x - 1, y + 1)):
                 break
 
+        x = current_x
+        y = current_y
+
         while True:
             x -= 1
             y -= 1
@@ -102,6 +108,9 @@ class Bishop(Piece):
 
             if not board.check_valid_location((x - 1, y - 1)):
                 break
+
+        x = current_x
+        y = current_y
 
         while True:
             x += 1
