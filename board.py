@@ -38,6 +38,17 @@ class Board:
         else:
             return True
 
+    def check_clear_or_capture(self, location, mov_piece):
+        if self.check_valid_location(location):
+            if self.check_tile_empty(location):
+                return True
+            elif self.pieces[location].player_num != mov_piece.player_num:
+                return True
+            else:
+                return False
+        else:
+            return False
+
     def evaluate(self, player_num=0):
         """Returns point sum of piece values on the board for a specified player"""
         point_sum = 0
@@ -60,12 +71,6 @@ class Board:
             move_piece.location = current_branch.to_location
             self.pieces[current_branch.to_location] = move_piece
             del(self.pieces[current_branch.from_location])
-
-        #if current_branch.piece in self.pieces.values():
-        #    current_location = current_branch.piece.location
-        #    current_branch.piece.location = current_branch.move_location
-        #    self.pieces[current_branch.move_location] = current_branch.piece
-        #    del(self.pieces[current_location])
 
     def create_branch_board(self, pos_branch):
         """Returns a new board with the branch applied to it"""
