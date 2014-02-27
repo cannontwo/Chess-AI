@@ -45,6 +45,15 @@ class Pawn(Piece):
             elif board.check_valid_location((current_x - 1, current_y + 1)) and not board.check_tile_empty((current_x - 1, current_y + 1)):
                 if board.pieces[(current_x - 1, current_y + 1)].player_num != self.player_num:
                     pos_moves.append(board.create_branch_board(branch.Branch(self, (current_x - 1, current_y + 1))))
+        else:
+            if board.check_tile_empty((current_x, current_y - 1)) and board.check_valid_location((current_x, current_y - 1)):
+                pos_moves.append(board.create_branch_board(branch.Branch(self, (current_x, current_y - 1))))
+            elif board.check_valid_location((current_x + 1, current_y - 1)) and not board.check_tile_empty((current_x + 1, current_y - 1)):
+                if board.pieces[(current_x + 1, current_y - 1)].player_num != self.player_num:
+                    pos_moves.append(board.create_branch_board(branch.Branch(self, (current_x + 1, current_y - 1))))
+            elif board.check_valid_location((current_x - 1, current_y - 1)) and not board.check_tile_empty((current_x - 1, current_y - 1)):
+                if board.pieces[(current_x - 1, current_y - 1)].player_num != self.player_num:
+                    pos_moves.append(board.create_branch_board(branch.Branch(self, (current_x - 1, current_y - 1))))
         return pos_moves
 
 
@@ -59,24 +68,29 @@ class Bishop(Piece):
         y = current_y = self.location[1]
 
         while True:
-            x += 1
-            y += 1
-
-            if board.check_tile_empty((x, y)):
-                pos_moves.append(board.create_branch_board(branch.Branch(self, (x, y))))
-            elif board.pieces[(x, y)].player_num is not self.player_num:
-                pos_moves.append(board.create_branch_board(branch.Branch(self, (x, y))))
-                break
-            else:
-                break
 
             if not board.check_valid_location((x + 1, y + 1)):
                 break
 
+            x += 1
+            y += 1
+
+            if board.check_tile_empty((x, y)):
+                pos_moves.append(board.create_branch_board(branch.Branch(self, (x, y))))
+            elif board.pieces[(x, y)].player_num is not self.player_num:
+                pos_moves.append(board.create_branch_board(branch.Branch(self, (x, y))))
+                break
+            else:
+                break
+
         x = current_x
         y = current_y
 
         while True:
+
+            if not board.check_valid_location((x - 1, y + 1)):
+                break
+
             x -= 1
             y += 1
 
@@ -88,13 +102,14 @@ class Bishop(Piece):
             else:
                 break
 
-            if not board.check_valid_location((x - 1, y + 1)):
-                break
-
         x = current_x
         y = current_y
 
         while True:
+
+            if not board.check_valid_location((x - 1, y - 1)):
+                break
+
             x -= 1
             y -= 1
 
@@ -106,13 +121,15 @@ class Bishop(Piece):
             else:
                 break
 
-            if not board.check_valid_location((x - 1, y - 1)):
-                break
-
         x = current_x
         y = current_y
 
         while True:
+
+            if not board.check_valid_location((x + 1, y - 1)):
+                break
+
+
             x += 1
             y -= 1
 
@@ -122,9 +139,6 @@ class Bishop(Piece):
                 pos_moves.append(board.create_branch_board(branch.Branch(self, (x, y))))
                 break
             else:
-                break
-
-            if not board.check_valid_location((x + 1, y - 1)):
                 break
 
         return pos_moves
@@ -148,6 +162,77 @@ class Rook(Piece):
     def possible_moves(self, board):
         """Possible moves for a rook"""
         pos_moves = []
+        x = current_x = self.location[0]
+        y = current_y = self.location[1]
+
+        while True:
+
+            if not board.check_valid_location((x + 1, y)):
+                break
+
+            x += 1
+
+            if board.check_tile_empty((x, y)):
+                pos_moves.append(board.create_branch_board(branch.Branch(self, (x, y))))
+            elif board.pieces[(x, y)].player_num is not self.player_num:
+                pos_moves.append(board.create_branch_board(branch.Branch(self, (x, y))))
+                break
+            else:
+                break
+
+        x = current_x
+        y = current_y
+
+        while True:
+
+            if not board.check_valid_location((x - 1, y)):
+                break
+
+            x -= 1
+
+            if board.check_tile_empty((x, y)):
+                pos_moves.append(board.create_branch_board(branch.Branch(self, (x, y))))
+            elif board.pieces[(x, y)].player_num is not self.player_num:
+                pos_moves.append(board.create_branch_board(branch.Branch(self, (x, y))))
+                break
+            else:
+                break
+
+        x = current_x
+        y = current_y
+
+        while True:
+
+            if not board.check_valid_location((x, y - 1)):
+                break
+
+            y -= 1
+
+            if board.check_tile_empty((x, y)):
+                pos_moves.append(board.create_branch_board(branch.Branch(self, (x, y))))
+            elif board.pieces[(x, y)].player_num is not self.player_num:
+                pos_moves.append(board.create_branch_board(branch.Branch(self, (x, y))))
+                break
+            else:
+                break
+
+        x = current_x
+        y = current_y
+
+        while True:
+
+            if not board.check_valid_location((x, y + 1)):
+                break
+
+            y += 1
+
+            if board.check_tile_empty((x, y)):
+                pos_moves.append(board.create_branch_board(branch.Branch(self, (x, y))))
+            elif board.pieces[(x, y)].player_num is not self.player_num:
+                pos_moves.append(board.create_branch_board(branch.Branch(self, (x, y))))
+                break
+            else:
+                break
 
         return pos_moves
 
@@ -159,6 +244,155 @@ class Queen(Piece):
     def possible_moves(self, board):
         """Possible moves for a queen"""
         pos_moves = []
+
+        x = current_x = self.location[0]
+        y = current_y = self.location[1]
+
+        while True:
+
+            if not board.check_valid_location((x + 1, y)):
+                break
+
+            x += 1
+
+            if board.check_tile_empty((x, y)):
+                pos_moves.append(board.create_branch_board(branch.Branch(self, (x, y))))
+            elif board.pieces[(x, y)].player_num is not self.player_num:
+                pos_moves.append(board.create_branch_board(branch.Branch(self, (x, y))))
+                break
+            else:
+                break
+
+        x = current_x
+        y = current_y
+
+        while True:
+
+            if not board.check_valid_location((x - 1, y)):
+                break
+
+            x -= 1
+
+            if board.check_tile_empty((x, y)):
+                pos_moves.append(board.create_branch_board(branch.Branch(self, (x, y))))
+            elif board.pieces[(x, y)].player_num is not self.player_num:
+                pos_moves.append(board.create_branch_board(branch.Branch(self, (x, y))))
+                break
+            else:
+                break
+
+        x = current_x
+        y = current_y
+
+        while True:
+
+            if not board.check_valid_location((x, y - 1)):
+                break
+
+            y -= 1
+
+            if board.check_tile_empty((x, y)):
+                pos_moves.append(board.create_branch_board(branch.Branch(self, (x, y))))
+            elif board.pieces[(x, y)].player_num is not self.player_num:
+                pos_moves.append(board.create_branch_board(branch.Branch(self, (x, y))))
+                break
+            else:
+                break
+
+        x = current_x
+        y = current_y
+
+        while True:
+
+            if not board.check_valid_location((x, y + 1)):
+                break
+
+            y += 1
+
+            if board.check_tile_empty((x, y)):
+                pos_moves.append(board.create_branch_board(branch.Branch(self, (x, y))))
+            elif board.pieces[(x, y)].player_num is not self.player_num:
+                pos_moves.append(board.create_branch_board(branch.Branch(self, (x, y))))
+                break
+            else:
+                break
+
+        x = current_x
+        y = current_y
+
+        while True:
+
+            if not board.check_valid_location((x + 1, y + 1)):
+                break
+
+            x += 1
+            y += 1
+
+            if board.check_tile_empty((x, y)):
+                pos_moves.append(board.create_branch_board(branch.Branch(self, (x, y))))
+            elif board.pieces[(x, y)].player_num is not self.player_num:
+                pos_moves.append(board.create_branch_board(branch.Branch(self, (x, y))))
+                break
+            else:
+                break
+
+        x = current_x
+        y = current_y
+
+        while True:
+
+            if not board.check_valid_location((x - 1, y + 1)):
+                break
+
+            x -= 1
+            y += 1
+
+            if board.check_tile_empty((x, y)):
+                pos_moves.append(board.create_branch_board(branch.Branch(self, (x, y))))
+            elif board.pieces[(x, y)].player_num is not self.player_num:
+                pos_moves.append(board.create_branch_board(branch.Branch(self, (x, y))))
+                break
+            else:
+                break
+
+        x = current_x
+        y = current_y
+
+        while True:
+
+            if not board.check_valid_location((x - 1, y - 1)):
+                break
+
+            x -= 1
+            y -= 1
+
+            if board.check_tile_empty((x, y)):
+                pos_moves.append(board.create_branch_board(branch.Branch(self, (x, y))))
+            elif board.pieces[(x, y)].player_num is not self.player_num:
+                pos_moves.append(board.create_branch_board(branch.Branch(self, (x, y))))
+                break
+            else:
+                break
+
+        x = current_x
+        y = current_y
+
+        while True:
+
+            if not board.check_valid_location((x + 1, y - 1)):
+                break
+
+
+            x += 1
+            y -= 1
+
+            if board.check_tile_empty((x, y)):
+                pos_moves.append(board.create_branch_board(branch.Branch(self, (x, y))))
+            elif board.pieces[(x, y)].player_num is not self.player_num:
+                pos_moves.append(board.create_branch_board(branch.Branch(self, (x, y))))
+                break
+            else:
+                break
 
         return pos_moves
 

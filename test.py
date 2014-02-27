@@ -2,6 +2,7 @@
 import pieces
 import board
 import branch
+import player
 
 foo = board.Board()
 
@@ -60,15 +61,18 @@ print foo.check_tile_empty((5,3))
 
 print foo.get_possible_moves(0)
 
-for move in foo.get_possible_moves(0):
-    for piece in move.pieces.values():
-        if isinstance(piece, pieces.Bishop) and piece.player_num == 0:
-            print piece
-
 boards = [foo, spaz, bap]
 boards.sort(key=board.Board.compare_board, reverse=True)
 
 print boards[0].evaluate()
 print boards[1].evaluate()
 print boards[2].evaluate()
+
+game_board = board.Board()
+self_player = player.Player(0, game_board) #white player
+enemy_player = player.Player(1, game_board) #black player
+
+print "\nGame Board:\n"
+print len(game_board.get_possible_moves(0))
+
 
