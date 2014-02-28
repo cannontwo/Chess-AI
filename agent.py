@@ -39,6 +39,7 @@ class Agent:
             return b
 
     def run(self, current_board):
+        print current_board
 
         best_board = self.take_turn(current_board,
                                     4,
@@ -56,4 +57,4 @@ class Agent:
             assert isinstance(new_board.previous_branch, branch.Branch), "The previous move is not valid"
 
             #TODO Put UCI string creation here, then return complete string
-            return "From: " + str(new_board.previous_branch.from_location) + " To: " + str(new_board.previous_branch.to_location) + "\nPiece: " + str(new_board.previous_branch.piece)
+            return "From: " + str(new_board.previous_branch.from_location) + " To: " + str(new_board.previous_branch.to_location) + "\nPiece: " + str(new_board.previous_branch.piece) + "\nBoard: " + str(new_board.previous_board.previous_board.previous_board.previous_branch.from_location) + "\nBoard #: " + str(board.Board.board_count)

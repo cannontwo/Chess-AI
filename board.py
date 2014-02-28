@@ -4,6 +4,7 @@ import pieces
 
 
 class Board:
+    board_count = 0
 
     @staticmethod
     def compare_board(cmp_board):
@@ -16,6 +17,8 @@ class Board:
         self.pieces = {}
         self.current_turn = 0
         self.previous_branch = 0
+        self.previous_board = 0
+        Board.board_count += 1
 
     def add_piece(self, piece):
         """Adds piece to board at the piece's location if the board does not already have a piece at that location.
@@ -84,7 +87,10 @@ class Board:
         cur_piece = return_board.pieces[pos_branch.piece.location]
         new_branch = branch.Branch(cur_piece, pos_branch.to_location)
 
+        Board.board_count += 1
+
         return_board.apply_branch(new_branch)
+        return_board.previous_board = self
 
         return return_board
 

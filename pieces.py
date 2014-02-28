@@ -22,10 +22,6 @@ class Piece(object):
         raise NotImplementedError("Implement a method to return possible moves")
 
 
-
-#TODO Massive implementation of possible move generation for different pieces
-
-
 class Pawn(Piece):
     def __init__(self, location=(0, 0), player_num = 0):
         super(Pawn, self).__init__(1, "pawn", location, player_num)
@@ -458,22 +454,5 @@ class King(Piece):
 
         if board.check_clear_or_capture((current_x, current_y + 1), self):
             pos_moves.append(board.create_branch_board(branch.Branch(self, (current_x, current_y + 1))))
-
-        #opp_num = 0
-        #
-        #if self.player_num is 0:
-        #    opp_num = 1
-        #
-        #for move in pos_moves:
-        #    opponent_moves = move.get_possible_moves(opp_num)
-        #    for opp_move in opponent_moves:
-        #        num_kings = 0
-        #        for t_piece in opp_move.pieces.values():
-        #            if isinstance(t_piece, King) and t_piece.player_num == self.player_num:
-        #                num_kings += 1
-        #                break
-        #        if num_kings == 0:
-        #            del move
-        #            break
 
         return pos_moves
