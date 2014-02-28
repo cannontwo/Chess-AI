@@ -1,4 +1,5 @@
 import board
+import branch
 import player
 
 
@@ -48,4 +49,7 @@ class Agent:
         assert isinstance(first_board, board.Board)
         assert isinstance(new_board, board.Board)
 
-        #TODO: Add something chess framework-specific to return a real move to the framework
+        if new_board.previous_branch is not 0:
+            assert isinstance(new_board.previous_branch, branch.Branch), "The previous move is not valid"
+
+            #TODO Put UCI string creation here, then return complete string

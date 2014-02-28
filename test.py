@@ -3,6 +3,7 @@ import pieces
 import board
 import branch
 import player
+import random
 import time
 
 start_time = time.time()
@@ -62,8 +63,6 @@ print foo.evaluate(0)
 print foo.check_tile_empty((5,5))
 print foo.check_tile_empty((5,3))
 
-print foo.get_possible_moves(0)
-
 boards = [foo, spaz, bap]
 boards.sort(key=board.Board.compare_board, reverse=True)
 
@@ -76,7 +75,11 @@ self_player = player.Player(0, game_board) #white player
 enemy_player = player.Player(1, game_board) #black player
 
 print "\nGame Board:\n"
-print len(game_board.get_possible_moves(0))
+moves = game_board.get_possible_moves(0)
+print len(moves)
+print "\nRandom Move:"
+random_move = moves[random.randint(0, len(moves) - 1)]
+print "From: " + str(random_move.previous_branch.from_location) + "  To: " + str(random_move.previous_branch.to_location) + "  Piece: " + str(random_move.previous_branch.piece)
 
-print "Time: %f" % (time.time() - start_time)
+print "\nTime: %f" % (time.time() - start_time)
 

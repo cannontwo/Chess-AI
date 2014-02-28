@@ -159,25 +159,25 @@ class Knight(Piece):
             pos_moves.append(board.create_branch_board(branch.Branch(self, (current_x + 3, current_y + 1))))
 
         if board.check_clear_or_capture((current_x + 1, current_y + 3), self):
-            pos_moves.append(board.create_branch_board(branch.Branch(self, (current_x + 3, current_y + 1))))
+            pos_moves.append(board.create_branch_board(branch.Branch(self, (current_x + 1, current_y + 3))))
 
         if board.check_clear_or_capture((current_x - 3, current_y + 1), self):
-            pos_moves.append(board.create_branch_board(branch.Branch(self, (current_x + 3, current_y + 1))))
+            pos_moves.append(board.create_branch_board(branch.Branch(self, (current_x - 3, current_y + 1))))
 
         if board.check_clear_or_capture((current_x - 1, current_y + 3), self):
-            pos_moves.append(board.create_branch_board(branch.Branch(self, (current_x + 3, current_y + 1))))
+            pos_moves.append(board.create_branch_board(branch.Branch(self, (current_x - 1, current_y + 3))))
 
         if board.check_clear_or_capture((current_x - 3, current_y - 1), self):
-            pos_moves.append(board.create_branch_board(branch.Branch(self, (current_x + 3, current_y + 1))))
+            pos_moves.append(board.create_branch_board(branch.Branch(self, (current_x - 3, current_y - 1))))
 
         if board.check_clear_or_capture((current_x - 1, current_y - 3), self):
-            pos_moves.append(board.create_branch_board(branch.Branch(self, (current_x + 3, current_y + 1))))
+            pos_moves.append(board.create_branch_board(branch.Branch(self, (current_x - 1, current_y - 3))))
 
         if board.check_clear_or_capture((current_x + 3, current_y - 1), self):
-            pos_moves.append(board.create_branch_board(branch.Branch(self, (current_x + 3, current_y + 1))))
+            pos_moves.append(board.create_branch_board(branch.Branch(self, (current_x + 3, current_y - 1))))
 
         if board.check_clear_or_capture((current_x + 1, current_y - 3), self):
-            pos_moves.append(board.create_branch_board(branch.Branch(self, (current_x + 3, current_y + 1))))
+            pos_moves.append(board.create_branch_board(branch.Branch(self, (current_x + 1, current_y - 3))))
 
         return pos_moves
 

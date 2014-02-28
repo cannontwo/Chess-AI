@@ -15,6 +15,7 @@ class Board:
     def __init__(self):
         self.pieces = {}
         self.current_turn = 0
+        self.previous_branch = 0
 
     def add_piece(self, piece):
         """Adds piece to board at the piece's location if the board does not already have a piece at that location.
@@ -71,6 +72,7 @@ class Board:
             move_piece.location = current_branch.to_location
             self.pieces[current_branch.to_location] = move_piece
             del(self.pieces[current_branch.from_location])
+            self.previous_branch = current_branch
 
     def create_branch_board(self, pos_branch):
         """Returns a new board with the branch applied to it"""
