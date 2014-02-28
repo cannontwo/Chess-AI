@@ -10,7 +10,7 @@ class Board:
         if isinstance(cmp_board, Board):
             return cmp_board.evaluate()
         else:
-            return 0
+            return cmp_board
 
     def __init__(self):
         self.pieces = {}

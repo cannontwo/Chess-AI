@@ -21,15 +21,18 @@ class Agent:
         if depth == 0 or len(eval_board.get_possible_moves(player_num)) == 0:
             return eval_board
 
+        pos_moves = eval_board.get_possible_moves(player_num)
+        pos_moves.sort(key=board.Board.compare_board, reverse=True)
+
         #The number passed to evaluate() should never change, so that scores are consistent for similar board states
         if player_num == 0:
-            for move in eval_board.get_possible_moves(player_num).sort(key=board.Board.compare_board, reverse=True):
+            for move in pos_moves:
                 a = max(a, self.take_turn(move, depth - 1, a, b, 1), key=board.Board.compare_board)
                 if b.evaluate() <= a.evaluate():
                     break
             return a
         else:
-            for move in eval_board.get_possible_moves(player_num).sort(key=board.Board.compare_board, reverse=True):
+            for move in pos_moves:
                 b = min(b, self.take_turn(move, depth - 1, a, b, 0), key=board.Board.compare_board)
                 if b.evaluate() <= a.evaluate():
                     break
@@ -53,3 +56,4 @@ class Agent:
             assert isinstance(new_board.previous_branch, branch.Branch), "The previous move is not valid"
 
             #TODO Put UCI string creation here, then return complete string
+            return "From: " + str(new_board.previous_branch.from_location) + " To: " + str(new_board.previous_branch.to_location) + "\nPiece: " + str(new_board.previous_branch.piece)

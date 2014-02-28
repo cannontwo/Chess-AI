@@ -12,14 +12,14 @@ class Piece(object):
     def __repr__(self):
         """Returns string representation of the given piece"""
         return_string = " "
-        return_string += "P:" + str(self.points) + " "
+        return_string += str(self.points) + " "
         return_string += self.name + " "
         return_string += "(" + str(self.location[0]) + "," + str(self.location[1]) + ")"
         return return_string
 
     def possible_moves(self, board):
         """Returns possible moves for a specific piece and board state"""
-        raise NotImplementedError("Implement an error to return possible moves")
+        raise NotImplementedError("Implement a method to return possible moves")
 
 
 
@@ -459,21 +459,21 @@ class King(Piece):
         if board.check_clear_or_capture((current_x, current_y + 1), self):
             pos_moves.append(board.create_branch_board(branch.Branch(self, (current_x, current_y + 1))))
 
-        opp_num = 0
-
-        if self.player_num is 0:
-            opp_num = 1
-
-        for move in pos_moves:
-            opponent_moves = move.get_possible_moves(opp_num)
-            for opp_move in opponent_moves:
-                num_kings = 0
-                for t_piece in opp_move.pieces.values():
-                    if isinstance(t_piece, King) and t_piece.player_num == self.player_num:
-                        num_kings += 1
-                        break
-                if num_kings == 0:
-                    del move
-                    break
+        #opp_num = 0
+        #
+        #if self.player_num is 0:
+        #    opp_num = 1
+        #
+        #for move in pos_moves:
+        #    opponent_moves = move.get_possible_moves(opp_num)
+        #    for opp_move in opponent_moves:
+        #        num_kings = 0
+        #        for t_piece in opp_move.pieces.values():
+        #            if isinstance(t_piece, King) and t_piece.player_num == self.player_num:
+        #                num_kings += 1
+        #                break
+        #        if num_kings == 0:
+        #            del move
+        #            break
 
         return pos_moves

@@ -1,6 +1,7 @@
 import random
+import time
 
-
+start_time = time.time()
 class Node:
     def __init__(self, num=0):
         if num == 0:
@@ -40,3 +41,4 @@ def alphabeta(node, depth, a, b, maximizing_player):
 
 
 print "\nAnswer: " + str(alphabeta(Node(), 4, Node(-99999999), Node(999999999), True).value)
+print "\nTime: %f" % (time.time() - start_time)
