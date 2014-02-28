@@ -3,6 +3,9 @@ import pieces
 import board
 import branch
 import player
+import time
+
+start_time = time.time()
 
 foo = board.Board()
 
@@ -75,4 +78,5 @@ enemy_player = player.Player(1, game_board) #black player
 print "\nGame Board:\n"
 print len(game_board.get_possible_moves(0))
 
+print "Time: %f" % (time.time() - start_time)
 

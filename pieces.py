@@ -432,4 +432,31 @@ class King(Piece):
         """Possible moves for a King"""
         pos_moves = []
 
+        current_x = self.location[0]
+        current_y = self.location[1]
+
+        if board.check_clear_or_capture((current_x + 1, current_y + 1), self):
+            pos_moves.append(board.create_branch_board(branch.Branch(self, (current_x + 1, current_y + 1))))
+
+        if board.check_clear_or_capture((current_x - 1, current_y - 1), self):
+            pos_moves.append(board.create_branch_board(branch.Branch(self, (current_x - 1, current_y - 1))))
+
+        if board.check_clear_or_capture((current_x + 1, current_y - 1), self):
+            pos_moves.append(board.create_branch_board(branch.Branch(self, (current_x + 1, current_y - 1))))
+
+        if board.check_clear_or_capture((current_x - 1, current_y + 1), self):
+            pos_moves.append(board.create_branch_board(branch.Branch(self, (current_x - 1, current_y + 1))))
+
+        if board.check_clear_or_capture((current_x - 1, current_y), self):
+            pos_moves.append(board.create_branch_board(branch.Branch(self, (current_x - 1, current_y))))
+
+        if board.check_clear_or_capture((current_x + 1, current_y), self):
+            pos_moves.append(board.create_branch_board(branch.Branch(self, (current_x + 1, current_y))))
+
+        if board.check_clear_or_capture((current_x, current_y - 1), self):
+            pos_moves.append(board.create_branch_board(branch.Branch(self, (current_x, current_y - 1))))
+
+        if board.check_clear_or_capture((current_x, current_y + 1), self):
+            pos_moves.append(board.create_branch_board(branch.Branch(self, (current_x, current_y + 1))))
+
         return pos_moves
