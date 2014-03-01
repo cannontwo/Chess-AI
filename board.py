@@ -18,6 +18,7 @@ class Board:
         self.current_turn = 0
         self.previous_branch = 0
         self.previous_board = 0
+        self.sum = 999
         Board.board_count += 1
 
     def add_piece(self, piece):
@@ -55,15 +56,18 @@ class Board:
 
     def evaluate(self, player_num=0):
         """Returns point sum of piece values on the board for a specified player"""
-        point_sum = 0
+        if self.sum == 999:
+            point_sum = 0
 
-        for piece in self.pieces.values():
-            if piece.player_num == player_num:
-                point_sum += piece.points
-            else:
-                point_sum -= piece.points
+            for piece in self.pieces.values():
+                if piece.player_num == player_num:
+                    point_sum += piece.points
+                else:
+                    point_sum -= piece.points
 
-        return point_sum
+            self.sum = point_sum
+
+        return self.sum
 
     def apply_branch(self, current_branch):
         """Applies a branch object to the board"""
@@ -76,6 +80,7 @@ class Board:
             self.pieces[current_branch.to_location] = move_piece
             del(self.pieces[current_branch.from_location])
             self.previous_branch = current_branch
+            self.sum = 999
 
     def create_branch_board(self, pos_branch):
         """Returns a new board with the branch applied to it"""
