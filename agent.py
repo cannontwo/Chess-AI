@@ -59,4 +59,5 @@ class Agent:
             #TODO Put UCI string creation here, then return complete string
             print len(first_board.pieces)
             print len(new_board.pieces)
-            return "From: " + str(new_board.previous_branch.from_location) + " To: " + str(new_board.previous_branch.to_location) + "\nPiece: " + str(new_board.previous_branch.piece) + "\nBoard #: " + str(board.Board.board_count)
+            next_board = new_board.previous_board.previous_board.previous_board.previous_board
+            return "From: " + str(next_board.previous_branch.from_location) + " To: " + str(next_board.previous_branch.to_location) + "\nPiece: " + str(next_board.previous_branch.piece) + "\nBoard #: " + str(board.Board.board_count)
