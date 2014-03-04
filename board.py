@@ -100,13 +100,10 @@ class Board:
         return return_board
 
     def get_possible_moves(self, player_num):
-        moves = []
         for piece in self.pieces.values():
             if piece.player_num == player_num:
                 for move in piece.possible_moves(self):
-                    moves.append(move)
-
-        return moves
+                    yield move
 
 
 class FakeBoard(Board):
