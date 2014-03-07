@@ -25,11 +25,22 @@ class Piece(object):
 class Pawn(Piece):
     def __init__(self, location=(0, 0), player_num = 0):
         super(Pawn, self).__init__(1, "pawn", location, player_num)
+        self.has_moved = False
 
     def possible_moves(self, board):
         """Possible moves for a pawn"""
         current_x = self.location[0]
         current_y = self.location[1]
+
+        if not self.has_moved:
+            if self.player_num is 0:
+                if board.check_valid_location((current_x, current_y + 2)) and board.check_tile_empty((current_x, current_y + 2)):
+                    self.has_moved = True
+                    yield board.create_branch_board(branch.Branch(self, (current_x, current_y + 2)))
+            else:
+                if board.check_valid_location((current_x, current_y - 2)) and board.check_tile_empty((current_x, current_y -2)):
+                    self.has_moved = True
+                    yield board.create_branch_board(branch.Branch(self, (current_x, current_y - 2)))
 
         if self.player_num is 0:
             if board.check_tile_empty((current_x, current_y + 1)) and board.check_valid_location((current_x, current_y + 1)):
